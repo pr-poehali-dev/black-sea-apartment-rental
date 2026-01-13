@@ -65,7 +65,7 @@ const Index = () => {
               Квартира на берегу<br />Черного моря
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-50 max-w-2xl">
-              Современная однокомнатная квартира с панорамным видом на море в экологически чистом районе
+              Современная однокомнатная квартира в экологически чистом районе
             </p>
             <div className="flex flex-wrap gap-4">
               <Button size="lg" className="bg-white text-ocean hover:bg-blue-50 shadow-xl hover:shadow-2xl transition-all hover:scale-105">
