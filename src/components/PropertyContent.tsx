@@ -1,0 +1,168 @@
+import { Card, CardContent } from '@/components/ui/card';
+import Icon from '@/components/ui/icon';
+
+const PropertyContent = () => {
+  const images = [
+    'https://cdn.poehali.dev/files/2025-07-08 19-47-37.JPG',
+    'https://cdn.poehali.dev/files/2021-07-21 20-31-35.JPG',
+    'https://cdn.poehali.dev/files/2021-07-23 20-15-33.JPG',
+    'https://cdn.poehali.dev/files/DSC_0080.JPG',
+    'https://cdn.poehali.dev/files/DSC_0075.JPG',
+    'https://cdn.poehali.dev/files/DSC_0071.JPG',
+    'https://cdn.poehali.dev/files/DSC_0068.JPG',
+    'https://cdn.poehali.dev/files/DSC_0072.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-28.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-19.JPG',
+    'https://cdn.poehali.dev/files/2024-11-17 13-41-05.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-12.JPG',
+    'https://cdn.poehali.dev/files/2024-12-01 16-36-55.JPG'
+  ];
+
+  const amenities = [
+    { icon: 'Wifi', title: 'Wi-Fi' },
+    { icon: 'AirVent', title: 'Кондиционер' },
+    { icon: 'Tv', title: 'Телевизор' },
+    { icon: 'Waves', title: 'Вид на море' },
+    { icon: 'ParkingCircle', title: 'Парковка' },
+    { icon: 'Utensils', title: 'Кухня' },
+    { icon: 'Refrigerator', title: 'Холодильник' },
+    { icon: 'WashingMachine', title: 'Стиральная машина' }
+  ];
+
+  const reviews = [
+    { name: 'Анна М.', rating: 5, text: 'Прекрасная квартира с шикарным видом! Все очень чисто, хозяева встретили и провели экскурсию. Трансфер из аэропорта был очень удобен!' },
+    { name: 'Дмитрий К.', rating: 5, text: 'Отличное расположение в заповеднике. Тихо, спокойно, море в 5 минутах. Квартира полностью оборудована всем необходимым.' },
+    { name: 'Елена С.', rating: 5, text: 'Останавливались семьей на две недели. Все понравилось! Особенно порадовал трансфер и помощь хозяев с организацией экскурсий.' }
+  ];
+
+  const rules = [
+    'Заезд: после 14:00',
+    'Выезд: до 12:00',
+    'Курение запрещено',
+    'Животные не допускаются',
+    'Максимальное количество гостей: 4 человека',
+    'Тихий час: 22:00 - 08:00'
+  ];
+
+  return (
+    <div className="space-y-12">
+      <section id="gallery" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Галерея
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {images.map((img, idx) => (
+            <div
+              key={idx}
+              className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer hover:scale-105"
+            >
+              <img
+                src={img}
+                alt={`Фото квартиры ${idx + 1}`}
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="description" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Описание
+        </h2>
+        <Card className="shadow-lg hover:shadow-xl transition-shadow">
+          <CardContent className="p-6 space-y-4">
+            <p className="text-lg leading-relaxed">Сдается светлая и комфортная однокомнатная квартира для проживания и отдыха (40 м²) с видом на можжевеловый лес и море. Квартира находится в ЖК «Резиденция Аннаполис», в живописном горном заповеднике, в 5 минутах пешком от галечного пляжа.</p>
+            <p className="text-lg leading-relaxed">В квартире есть все необходимое для комфортного проживания: двуспальная кровать, диван-кровать, встроенная кухня с необходимой посудой и техникой (холодильник, электроплита, СВЧ, чайник, стиральная машина), телевизор, кондиционер, Wi-Fi.</p>
+            <p className="text-lg leading-relaxed">На территории комплекса: бассейн для взрослых и детей, детская площадка, зона отдыха с беседкой, охраняемая парковка.</p>
+            <div className="bg-gradient-to-r from-ocean/10 to-accent/10 p-4 rounded-lg">
+              <p className="font-semibold text-ocean mb-2">🎁 Бонус: Трансфер из аэропорта в подарок!</p>
+              <p className="text-sm text-muted-foreground">При бронировании от 7 дней мы встретим вас в аэропорту Анапы и довезём до комплекса</p>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="amenities" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Удобства
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {amenities.map((item, idx) => (
+            <Card key={idx} className="hover:shadow-lg transition-shadow cursor-pointer hover:scale-105 duration-300">
+              <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+                <div className="p-3 bg-gradient-to-br from-ocean/10 to-accent/10 rounded-full">
+                  <Icon name={item.icon as any} size={24} className="text-ocean" />
+                </div>
+                <p className="font-medium">{item.title}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="reviews" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Отзывы гостей
+        </h2>
+        <div className="space-y-4">
+          {reviews.map((review, idx) => (
+            <Card key={idx} className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="font-semibold text-lg">{review.name}</p>
+                  <div className="flex gap-1">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Icon key={i} name="Star" size={16} className="fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">{review.text}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="rules" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Правила проживания
+        </h2>
+        <Card className="shadow-lg">
+          <CardContent className="p-6">
+            <ul className="space-y-3">
+              {rules.map((rule, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <Icon name="CheckCircle2" size={20} className="text-ocean mt-0.5 flex-shrink-0" />
+                  <span className="text-muted-foreground">{rule}</span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="map" className="animate-fade-in">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">
+          Расположение
+        </h2>
+        <Card className="shadow-lg overflow-hidden">
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?ll=37.316622%2C44.947621&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjgwNjg0NRJu0KDQvtGB0YHQuNGPLCDQmtGA0LDRgdC90L7QtNCw0YDRgdC60LjQuSDQutGA0LDQuSwg0JDQvdCw0L_QsCwg0YHQtdC70L4g0JHQvtC70YzRiNC-0Lkg0KPRgtGA0LjRiCwg0KbQstC10YLQvtGHIgoN-ZonQhVn9UpC&z=16.49"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allowFullScreen
+              style={{ position: 'relative' }}
+              title="Карта ЖК Анаполис"
+            />
+          </div>
+        </Card>
+      </section>
+    </div>
+  );
+};
+
+export default PropertyContent;
