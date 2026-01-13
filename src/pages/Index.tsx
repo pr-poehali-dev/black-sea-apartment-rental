@@ -329,19 +329,26 @@ const Index = () => {
                     <Icon name="Phone" size={20} />
                     Контакты
                   </CardTitle>
+                  <CardDescription>Евгений, хозяин</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    <Icon name="Phone" size={16} className="mr-2" />
-                    +7 (XXX) XXX-XX-XX
+                  <Button variant="outline" className="w-full justify-start" asChild>
+                    <a href="tel:+79141985356">
+                      <Icon name="Phone" size={16} className="mr-2" />
+                      +7 (914) 198-53-56
+                    </a>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Icon name="Mail" size={16} className="mr-2" />
-                    info@anapolis-sea.ru
+                  <Button variant="outline" className="w-full justify-start" asChild>
+                    <a href="mailto:dr.makagonoff@yandex.ru">
+                      <Icon name="Mail" size={16} className="mr-2" />
+                      dr.makagonoff@yandex.ru
+                    </a>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Icon name="MessageCircle" size={16} className="mr-2" />
-                    WhatsApp
+                  <Button variant="outline" className="w-full justify-start" asChild>
+                    <a href="https://wa.me/79141985356" target="_blank" rel="noopener noreferrer">
+                      <Icon name="MessageCircle" size={16} className="mr-2" />
+                      WhatsApp
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
