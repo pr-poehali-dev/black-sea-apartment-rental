@@ -26,7 +26,7 @@ const HeroSection = () => {
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 backdrop-blur-sm">
               <Icon name="Car" size={20} className="mr-2" />
-              Трансфер в подарок
+              Трансфер по цене такси
             </Button>
           </div>
         </div>
