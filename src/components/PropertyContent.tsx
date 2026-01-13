@@ -148,17 +148,11 @@ const PropertyContent = () => {
           Расположение
         </h2>
         <Card className="shadow-lg overflow-hidden">
-          <div className="aspect-video w-full">
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=37.338400%2C44.828056&z=17&l=map&pt=37.338400,44.828056,pm2rdm"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              allowFullScreen
-              style={{ position: 'relative' }}
-              title="Карта ЖК Анаполис Корпус 7"
-            />
-          </div>
+          <img
+            src="https://cdn.poehali.dev/files/Снимок экрана 2026-01-13 144145.jpg"
+            alt="Карта расположения ЖК Анаполис"
+            className="w-full h-auto object-cover"
+          />
         </Card>
       </section>
     </div>
