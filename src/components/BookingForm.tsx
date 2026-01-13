@@ -230,12 +230,12 @@ const BookingForm = () => {
           <p className="text-sm text-muted-foreground mb-4">Свяжитесь с нами для консультации</p>
           <Button 
             variant="outline" 
-            className="w-full bg-green-50 hover:bg-green-100 border-green-200"
+            className="w-full bg-blue-50 hover:bg-blue-100 border-blue-200"
             asChild
           >
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
-              <Icon name="MessageCircle" size={16} className="mr-2" />
-              Написать в WhatsApp
+            <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
+              <Icon name="Send" size={16} className="mr-2" />
+              Написать в Max
             </a>
           </Button>
         </CardContent>
