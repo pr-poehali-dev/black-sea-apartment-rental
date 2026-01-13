@@ -153,6 +153,31 @@ const PropertyContent = () => {
             alt="Карта расположения ЖК Анаполис"
             className="w-full h-auto object-cover"
           />
+          <CardContent className="p-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <Icon name="MapPin" size={20} className="text-ocean mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-lg mb-1">ЖК Резиденция Анаполис, Корпус 7</p>
+                <p className="text-muted-foreground">Село Варваровка, Большой Утриш, Анапа</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="flex items-center gap-2">
+                <Icon name="Waves" size={18} className="text-ocean" />
+                <div>
+                  <p className="text-sm font-medium">До моря</p>
+                  <p className="text-sm text-muted-foreground">5 минут пешком</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icon name="Trees" size={18} className="text-ocean" />
+                <div>
+                  <p className="text-sm font-medium">До пляжа</p>
+                  <p className="text-sm text-muted-foreground">300 метров</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
         </Card>
       </section>
     </div>
