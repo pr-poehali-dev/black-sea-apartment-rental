@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +14,12 @@ import { ru } from 'date-fns/locale';
 const Index = () => {
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [guests, setGuests] = useState('2');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const getPriceForDate = (date: Date): number => {
     const month = date.getMonth() + 1;
@@ -35,6 +44,76 @@ const Index = () => {
   };
 
   const calculation = calculateTotal();
+
+  const handleSubmit = async () => {
+    if (!name || !phone) {
+      toast({
+        title: 'Ошибка',
+        description: 'Заполните имя и телефон',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    if (!checkIn || !checkOut) {
+      toast({
+        title: 'Ошибка',
+        description: 'Выберите даты заезда и выезда',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/e91c3e42-03dc-4c55-a046-3bd7b60732bc', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          checkIn: format(checkIn, 'dd MMMM yyyy', { locale: ru }),
+          checkOut: format(checkOut, 'dd MMMM yyyy', { locale: ru }),
+          guests,
+          days: calculation?.days || 0,
+          total: calculation?.total || 0,
+          message
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast({
+          title: 'Заявка отправлена!',
+          description: 'Мы свяжемся с вами в ближайшее время'
+        });
+        setName('');
+        setPhone('');
+        setGuests('2');
+        setMessage('');
+        setCheckIn(undefined);
+        setCheckOut(undefined);
+      } else {
+        toast({
+          title: 'Ошибка',
+          description: data.error || 'Попробуйте позже',
+          variant: 'destructive'
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось отправить заявку',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const images = [
     'https://cdn.poehali.dev/files/2025-07-08 19-47-37.JPG',
@@ -354,9 +433,50 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground">за ночь</p>
                     </div>
                   )}
-                  <Button className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all">
+                  <div className="pt-4 border-t space-y-4">
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                      <Input 
+                        placeholder="Иван Иванов" 
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Телефон</label>
+                      <Input 
+                        placeholder="+7 (999) 123-45-67" 
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Количество гостей</label>
+                      <Input 
+                        type="number" 
+                        min="1" 
+                        max="4" 
+                        value={guests}
+                        onChange={(e) => setGuests(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Сообщение (необязательно)</label>
+                      <Textarea 
+                        placeholder="Ваши пожелания или вопросы..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all"
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                  >
                     <Icon name="Send" size={16} className="mr-2" />
-                    Отправить заявку
+                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                   </Button>
                 </CardContent>
               </Card>
