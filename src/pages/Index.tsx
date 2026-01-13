@@ -5,12 +5,36 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { format } from 'date-fns';
+import { format, differenceInDays } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 const Index = () => {
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
+
+  const getPriceForDate = (date: Date): number => {
+    const month = date.getMonth() + 1;
+    if (month >= 7 && month <= 8) return 5500;
+    if (month >= 9 && month <= 10) return 4500;
+    if (month >= 3 && month <= 6) return 4500;
+    return 3500;
+  };
+
+  const calculateTotal = (): { days: number; total: number } | null => {
+    if (!checkIn || !checkOut) return null;
+    const days = differenceInDays(checkOut, checkIn);
+    if (days <= 0) return null;
+    
+    let total = 0;
+    for (let i = 0; i < days; i++) {
+      const currentDate = new Date(checkIn);
+      currentDate.setDate(currentDate.getDate() + i);
+      total += getPriceForDate(currentDate);
+    }
+    return { days, total };
+  };
+
+  const calculation = calculateTotal();
 
   const images = [
     'https://cdn.poehali.dev/files/2025-07-08 19-47-37.JPG',
@@ -308,11 +332,28 @@ const Index = () => {
                       </PopoverContent>
                     </Popover>
                   </div>
-                  <div className="pt-4 border-t">
-                    <p className="text-sm text-muted-foreground mb-2">Стоимость от:</p>
-                    <p className="text-3xl font-bold text-ocean">4 000 ₽</p>
-                    <p className="text-sm text-muted-foreground">за ночь</p>
-                  </div>
+                  {calculation && (
+                    <div className="pt-4 border-t space-y-3 bg-gradient-to-br from-ocean/5 to-accent/5 p-4 rounded-lg">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Количество ночей:</span>
+                        <span className="font-semibold">{calculation.days}</span>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <span className="text-muted-foreground">Итого:</span>
+                        <div className="text-right">
+                          <p className="text-3xl font-bold text-ocean">{calculation.total.toLocaleString('ru-RU')} ₽</p>
+                          <p className="text-xs text-muted-foreground">≈ {Math.round(calculation.total / calculation.days)} ₽/ночь</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {!calculation && (
+                    <div className="pt-4 border-t">
+                      <p className="text-sm text-muted-foreground mb-2">Стоимость от:</p>
+                      <p className="text-3xl font-bold text-ocean">3 500 ₽</p>
+                      <p className="text-sm text-muted-foreground">за ночь</p>
+                    </div>
+                  )}
                   <Button className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all">
                     <Icon name="Send" size={16} className="mr-2" />
                     Отправить заявку
