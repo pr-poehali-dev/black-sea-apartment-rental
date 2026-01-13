@@ -40,9 +40,10 @@ const Index = () => {
   ];
 
   const prices = [
-    { period: 'Май - Июнь', price: '5 000', description: 'Низкий сезон' },
-    { period: 'Июль - Август', price: '6 000', description: 'Высокий сезон' },
-    { period: 'Сентябрь - Октябрь', price: '4 000', description: 'Бархатный сезон' }
+    { period: 'Март - Июнь', price: '4 500', description: 'Весенний сезон' },
+    { period: 'Июль - Август', price: '5 500', description: 'Высокий сезон' },
+    { period: 'Сентябрь - Октябрь', price: '4 500', description: 'Бархатный сезон' },
+    { period: 'Ноябрь - Февраль', price: '3 500', description: 'Зимний сезон' }
   ];
 
   const reviews = [
