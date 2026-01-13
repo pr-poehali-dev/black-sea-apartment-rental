@@ -20,7 +20,12 @@ const Index = () => {
     'https://cdn.poehali.dev/files/DSC_0075.JPG',
     'https://cdn.poehali.dev/files/DSC_0071.JPG',
     'https://cdn.poehali.dev/files/DSC_0068.JPG',
-    'https://cdn.poehali.dev/files/DSC_0072.JPG'
+    'https://cdn.poehali.dev/files/DSC_0072.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-28.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-19.JPG',
+    'https://cdn.poehali.dev/files/2024-11-17 13-41-05.JPG',
+    'https://cdn.poehali.dev/files/2024-11-24 14-41-12.JPG',
+    'https://cdn.poehali.dev/files/2024-12-01 16-36-55.JPG'
   ];
 
   const amenities = [
