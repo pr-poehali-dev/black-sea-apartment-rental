@@ -237,12 +237,16 @@ const Index = () => {
                 Расположение
               </h2>
               <Card className="shadow-lg overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-ocean/20 to-accent/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <Icon name="MapPin" size={48} className="text-ocean mx-auto mb-3" />
-                    <p className="font-semibold text-lg">ЖК Анаполис</p>
-                    <p className="text-muted-foreground">Заповедный район, Черное море</p>
-                  </div>
+                <div className="aspect-video w-full">
+                  <iframe
+                    src="https://yandex.ru/map-widget/v1/?ll=37.316622%2C44.947621&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjgwNjg0NRJu0KDQvtGB0YHQuNGPLCDQmtGA0LDRgdC90L7QtNCw0YDRgdC60LjQuSDQutGA0LDQuSwg0JDQvdCw0L_QsCwg0YHQtdC70L4g0JHQvtC70YzRiNC-0Lkg0KPRgtGA0LjRiCwg0KbQstC10YLQvtGHIgoN-ZonQhVn9UpC&z=16.49"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allowFullScreen
+                    style={{ position: 'relative' }}
+                    title="Карта ЖК Анаполис"
+                  />
                 </div>
               </Card>
             </section>
