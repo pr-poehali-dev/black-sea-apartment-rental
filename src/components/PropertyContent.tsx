@@ -84,7 +84,7 @@ const PropertyContent = () => {
                 </div>
               </div>
               <a 
-                href="https://3.redirect.appmetrica.yandex.com/route?start-lat=44.897667&start-lon=37.316667&end-lat=44.828056&end-lon=37.338400&level=2&appmetrica_tracking_id=1178268795219780156"
+                href="https://3.redirect.appmetrica.yandex.com/route?start-lat=44.950537&start-lon=37.317821&end-lat=44.828056&end-lon=37.338400&level=2&appmetrica_tracking_id=1178268795219780156"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-lg transition-colors"

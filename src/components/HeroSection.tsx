@@ -25,7 +25,7 @@ const HeroSection = () => {
               Забронировать
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 backdrop-blur-sm" asChild>
-              <a href="https://3.redirect.appmetrica.yandex.com/route?start-lat=44.897667&start-lon=37.316667&end-lat=44.828056&end-lon=37.338400&level=2&appmetrica_tracking_id=1178268795219780156" target="_blank" rel="noopener noreferrer">
+              <a href="https://3.redirect.appmetrica.yandex.com/route?start-lat=44.950537&start-lon=37.317821&end-lat=44.828056&end-lon=37.338400&level=2&appmetrica_tracking_id=1178268795219780156" target="_blank" rel="noopener noreferrer">
                 <Icon name="Car" size={20} className="mr-2" />
                 Трансфер по цене такси
               </a>
