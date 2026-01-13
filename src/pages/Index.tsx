@@ -30,7 +30,7 @@ const Index = () => {
   ];
 
   const prices = [
-    { period: 'Май - Июнь', price: '3 500', description: 'Низкий сезон' },
+    { period: 'Май - Июнь', price: '5 000', description: 'Низкий сезон' },
     { period: 'Июль - Август', price: '6 000', description: 'Высокий сезон' },
     { period: 'Сентябрь - Октябрь', price: '4 000', description: 'Бархатный сезон' }
   ];
@@ -290,7 +290,7 @@ const Index = () => {
                   </div>
                   <div className="pt-4 border-t">
                     <p className="text-sm text-muted-foreground mb-2">Стоимость от:</p>
-                    <p className="text-3xl font-bold text-ocean">3 500 ₽</p>
+                    <p className="text-3xl font-bold text-ocean">4 000 ₽</p>
                     <p className="text-sm text-muted-foreground">за ночь</p>
                   </div>
                   <Button className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all">
