@@ -13,10 +13,9 @@ const Index = () => {
   const [checkOut, setCheckOut] = useState<Date>();
 
   const images = [
-    'https://cdn.poehali.dev/projects/d184cdd8-edde-476b-bcdd-4da0c77a66d9/files/be35b894-220d-402c-a3aa-421c3170b406.jpg',
-    'https://cdn.poehali.dev/projects/d184cdd8-edde-476b-bcdd-4da0c77a66d9/files/f76c167b-d0d4-44a0-8637-02b5230939c1.jpg',
-    'https://cdn.poehali.dev/projects/d184cdd8-edde-476b-bcdd-4da0c77a66d9/files/4a505711-5a4a-415c-8f41-889545a38438.jpg',
-    'https://cdn.poehali.dev/files/2025-07-08 19-47-37.JPG'
+    'https://cdn.poehali.dev/files/2025-07-08 19-47-37.JPG',
+    'https://cdn.poehali.dev/files/2021-07-21 20-31-35.JPG',
+    'https://cdn.poehali.dev/files/2021-07-23 20-15-33.JPG'
   ];
 
   const amenities = [
