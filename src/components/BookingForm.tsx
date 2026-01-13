@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { format, differenceInDays } from 'date-fns';
@@ -18,6 +19,7 @@ const BookingForm = () => {
   const [guests, setGuests] = useState('2');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const { toast } = useToast();
 
   const getPriceForDate = (date: Date): number => {
@@ -63,55 +65,17 @@ const BookingForm = () => {
       return;
     }
 
-    setIsSubmitting(true);
+    toast({
+      title: 'Форма заполнена!',
+      description: `${name}, ${phone}, заезд ${format(checkIn, 'dd.MM.yyyy')}, выезд ${format(checkOut, 'dd.MM.yyyy')}, гостей: ${guests}`
+    });
 
-    try {
-      const response = await fetch('https://functions.poehali.dev/e91c3e42-03dc-4c55-a046-3bd7b60732bc', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          checkIn: format(checkIn, 'dd MMMM yyyy', { locale: ru }),
-          checkOut: format(checkOut, 'dd MMMM yyyy', { locale: ru }),
-          guests,
-          days: calculation?.days || 0,
-          total: calculation?.total || 0,
-          message
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        toast({
-          title: 'Заявка отправлена!',
-          description: 'Мы свяжемся с вами в ближайшее время'
-        });
-        setName('');
-        setPhone('');
-        setGuests('2');
-        setMessage('');
-        setCheckIn(undefined);
-        setCheckOut(undefined);
-      } else {
-        toast({
-          title: 'Ошибка',
-          description: data.error || 'Попробуйте позже',
-          variant: 'destructive'
-        });
-      }
-    } catch (error) {
-      toast({
-        title: 'Ошибка',
-        description: 'Не удалось отправить заявку',
-        variant: 'destructive'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setName('');
+    setPhone('');
+    setGuests('2');
+    setMessage('');
+    setCheckIn(undefined);
+    setCheckOut(undefined);
   };
 
   const prices = [
@@ -179,51 +143,62 @@ const BookingForm = () => {
               <p className="text-sm text-muted-foreground">за ночь</p>
             </div>
           )}
-          <div className="pt-4 border-t space-y-4">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Ваше имя</label>
-              <Input 
-                placeholder="Иван Иванов" 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Телефон</label>
-              <Input 
-                placeholder="+7 (999) 123-45-67" 
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Количество гостей</label>
-              <Input 
-                type="number" 
-                min="1" 
-                max="4" 
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Сообщение (необязательно)</label>
-              <Textarea 
-                placeholder="Ваши пожелания или вопросы..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={3}
-              />
-            </div>
-          </div>
-          <Button 
-            className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            <Icon name="Send" size={16} className="mr-2" />
-            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-          </Button>
+          <Collapsible open={isBookingOpen} onOpenChange={setIsBookingOpen}>
+            <CollapsibleTrigger asChild>
+              <Button 
+                variant="outline" 
+                className="w-full justify-between mt-4"
+              >
+                <span className="font-semibold">Форма бронирования</span>
+                <Icon name={isBookingOpen ? "ChevronUp" : "ChevronDown"} size={20} />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="pt-4 space-y-4">
+              <div>
+                <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                <Input 
+                  placeholder="Иван Иванов" 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-2 block">Телефон</label>
+                <Input 
+                  placeholder="+7 (999) 123-45-67" 
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-2 block">Количество гостей</label>
+                <Input 
+                  type="number" 
+                  min="1" 
+                  max="4" 
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-2 block">Сообщение (необязательно)</label>
+                <Textarea 
+                  placeholder="Ваши пожелания или вопросы..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <Button 
+                className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+              >
+                <Icon name="Send" size={16} className="mr-2" />
+                {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+              </Button>
+            </CollapsibleContent>
+          </Collapsible>
         </CardContent>
       </Card>
 
@@ -251,7 +226,7 @@ const BookingForm = () => {
             Нужна помощь?
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent>
           <p className="text-sm text-muted-foreground mb-4">Свяжитесь с нами для консультации</p>
           <Button 
             variant="outline" 
@@ -261,16 +236,6 @@ const BookingForm = () => {
             <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
               <Icon name="MessageCircle" size={16} className="mr-2" />
               Написать в WhatsApp
-            </a>
-          </Button>
-          <Button 
-            variant="outline" 
-            className="w-full bg-blue-50 hover:bg-blue-100 border-blue-200"
-            asChild
-          >
-            <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
-              <Icon name="Send" size={16} className="mr-2" />
-              Написать в Max
             </a>
           </Button>
         </CardContent>
