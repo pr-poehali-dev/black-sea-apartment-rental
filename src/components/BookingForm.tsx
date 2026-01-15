@@ -66,7 +66,7 @@ const BookingForm = () => {
 
   const calculation = calculateTotal();
 
-  const handleSubmit = async () => {
+  const handlePayment = async () => {
     if (!name || !phone) {
       toast({
         title: 'Ошибка',
@@ -85,17 +85,39 @@ const BookingForm = () => {
       return;
     }
 
+    if (!calculation) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось рассчитать стоимость',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Данные вашей карты (замените на реальные)
+    const cardNumber = '2200700955746733';
+    
     toast({
-      title: 'Форма заполнена!',
-      description: `${name}, ${phone}, заезд ${format(checkIn, 'dd.MM.yyyy')}, выезд ${format(checkOut, 'dd.MM.yyyy')}, гостей: ${guests}`
+      title: 'Переход к оплате',
+      description: `Сумма: ${calculation.total} ₽. Карта: ${cardNumber.slice(-4)}`,
     });
 
-    setName('');
-    setPhone('');
-    setGuests('2');
-    setMessage('');
-    setCheckIn(undefined);
-    setCheckOut(undefined);
+    // Здесь будет интеграция с платежной системой
+    setTimeout(() => {
+      toast({
+        title: 'Оплата успешна!',
+        description: `Бронирование подтверждено на ${calculation.days} ${calculation.days === 1 ? 'ночь' : 'ночей'}`,
+      });
+      setIsSubmitting(false);
+      setName('');
+      setPhone('');
+      setGuests('2');
+      setMessage('');
+      setCheckIn(undefined);
+      setCheckOut(undefined);
+    }, 2000);
   };
 
   const prices = [
@@ -227,14 +249,23 @@ const BookingForm = () => {
                   rows={3}
                 />
               </div>
-              <Button 
-                className="w-full bg-gradient-to-r from-ocean to-ocean-light hover:from-ocean-light hover:to-secondary shadow-lg hover:shadow-xl transition-all"
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-              >
-                <Icon name="Send" size={16} className="mr-2" />
-                {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-              </Button>
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Icon name="CreditCard" size={16} className="text-green-600" />
+                    <span className="text-sm font-semibold text-green-800">Привязанная карта</span>
+                  </div>
+                  <p className="text-sm text-green-700">Сбербанк •••• 6733</p>
+                </div>
+                <Button 
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all"
+                  onClick={handlePayment}
+                  disabled={isSubmitting || !calculation}
+                >
+                  <Icon name="CreditCard" size={16} className="mr-2" />
+                  {isSubmitting ? 'Обработка...' : `Оплатить ${calculation ? calculation.total.toLocaleString('ru-RU') : ''} ₽`}
+                </Button>
+              </div>
             </CollapsibleContent>
           </Collapsible>
         </CardContent>
