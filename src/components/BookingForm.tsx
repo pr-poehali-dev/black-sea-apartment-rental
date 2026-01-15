@@ -96,8 +96,8 @@ const BookingForm = () => {
 
     setIsSubmitting(true);
 
-    // Данные вашей карты (замените на реальные)
-    const cardNumber = '2200700955746733';
+    // Данные вашей карты
+    const cardNumber = '2204310306920813';
     
     toast({
       title: 'Переход к оплате',
@@ -255,7 +255,7 @@ const BookingForm = () => {
                     <Icon name="CreditCard" size={16} className="text-green-600" />
                     <span className="text-sm font-semibold text-green-800">Привязанная карта</span>
                   </div>
-                  <p className="text-sm text-green-700">Сбербанк •••• 6733</p>
+                  <p className="text-sm text-green-700">Яндекс Карта •••• 0813</p>
                 </div>
                 <Button 
                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all"
