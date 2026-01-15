@@ -288,6 +288,36 @@ const BookingForm = () => {
         </CardContent>
       </Card>
 
+      <Card className="shadow-xl animate-fade-in bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-300">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-orange-700">
+            <Icon name="Heart" size={20} />
+            Поддержка сайта
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground">Если вам понравился наш сайт, вы можете поддержать его развитие</p>
+          <div className="bg-white p-4 rounded-lg border border-yellow-200">
+            <p className="text-xs text-muted-foreground mb-2">Яндекс Карта</p>
+            <p className="text-lg font-bold text-gray-800 tracking-wider">2204 3103 0692 0813</p>
+          </div>
+          <Button 
+            variant="outline" 
+            className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-white font-semibold border-0 shadow-md"
+            onClick={() => {
+              navigator.clipboard.writeText('2204310306920813');
+              toast({
+                title: 'Скопировано!',
+                description: 'Номер карты скопирован в буфер обмена',
+              });
+            }}
+          >
+            <Icon name="Copy" size={16} className="mr-2" />
+            Скопировать номер карты
+          </Button>
+        </CardContent>
+      </Card>
+
       <Card className="shadow-xl animate-fade-in bg-gradient-to-br from-ocean/5 to-accent/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
