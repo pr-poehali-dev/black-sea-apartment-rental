@@ -129,18 +129,18 @@ const BookingForm = () => {
 
   return (
     <div className="sticky top-4 space-y-6">
-      <Card className="shadow-xl animate-fade-in">
+      <Card className="shadow-xl animate-fade-in bg-gradient-to-br from-ocean/10 to-accent/10 border-2 border-ocean/20">
         <CardHeader>
-          <CardTitle>Тарифы</CardTitle>
+          <CardTitle className="text-2xl bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">Тарифы</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {prices.map((price, idx) => (
-            <div key={idx} className="flex items-center justify-between p-3 bg-gradient-to-r from-ocean/5 to-accent/5 rounded-lg">
+            <div key={idx} className="flex items-center justify-between p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-ocean/10">
               <div>
-                <p className="font-semibold">{price.period}</p>
+                <p className="font-bold text-lg">{price.period}</p>
                 <p className="text-sm text-muted-foreground">{price.description}</p>
               </div>
-              <p className="text-xl font-bold text-ocean">{price.price} ₽</p>
+              <p className="text-2xl font-bold bg-gradient-to-r from-ocean to-accent bg-clip-text text-transparent">{price.price} ₽</p>
             </div>
           ))}
         </CardContent>
