@@ -34,10 +34,18 @@ const Index = () => {
             <div>
               <h3 className="text-xl font-bold mb-4">Информация</h3>
               <ul className="space-y-2 text-blue-100">
-                <li>О квартире</li>
-                <li>Правила проживания</li>
-                <li>Отзывы гостей</li>
-                <li>Часто задаваемые вопросы</li>
+                <li>
+                  <a href="#description" className="hover:text-white transition-colors cursor-pointer">О квартире</a>
+                </li>
+                <li>
+                  <a href="#rules" className="hover:text-white transition-colors cursor-pointer">Правила проживания</a>
+                </li>
+                <li>
+                  <a href="#reviews" className="hover:text-white transition-colors cursor-pointer">Отзывы гостей</a>
+                </li>
+                <li>
+                  <a href="#amenities" className="hover:text-white transition-colors cursor-pointer">Удобства</a>
+                </li>
               </ul>
             </div>
             <div>
