@@ -129,6 +129,23 @@ const BookingForm = () => {
 
   return (
     <div className="sticky top-4 space-y-6">
+      <Card className="shadow-xl animate-fade-in">
+        <CardHeader>
+          <CardTitle>Тарифы</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {prices.map((price, idx) => (
+            <div key={idx} className="flex items-center justify-between p-3 bg-gradient-to-r from-ocean/5 to-accent/5 rounded-lg">
+              <div>
+                <p className="font-semibold">{price.period}</p>
+                <p className="text-sm text-muted-foreground">{price.description}</p>
+              </div>
+              <p className="text-xl font-bold text-ocean">{price.price} ₽</p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
       <Card className="shadow-xl animate-fade-in bg-gradient-to-br from-white to-blue-50">
         <CardHeader>
           <CardTitle className="text-2xl">Бронирование</CardTitle>
@@ -268,23 +285,6 @@ const BookingForm = () => {
               </div>
             </CollapsibleContent>
           </Collapsible>
-        </CardContent>
-      </Card>
-
-      <Card className="shadow-xl animate-fade-in">
-        <CardHeader>
-          <CardTitle>Тарифы</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {prices.map((price, idx) => (
-            <div key={idx} className="flex items-center justify-between p-3 bg-gradient-to-r from-ocean/5 to-accent/5 rounded-lg">
-              <div>
-                <p className="font-semibold">{price.period}</p>
-                <p className="text-sm text-muted-foreground">{price.description}</p>
-              </div>
-              <p className="text-xl font-bold text-ocean">{price.price} ₽</p>
-            </div>
-          ))}
         </CardContent>
       </Card>
 
