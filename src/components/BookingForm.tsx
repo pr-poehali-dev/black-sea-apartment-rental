@@ -22,6 +22,26 @@ const BookingForm = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const { toast } = useToast();
 
+  const bookedDates = [
+    new Date(2026, 0, 20),
+    new Date(2026, 0, 21),
+    new Date(2026, 0, 22),
+    new Date(2026, 0, 25),
+    new Date(2026, 0, 26),
+    new Date(2026, 1, 1),
+    new Date(2026, 1, 2),
+    new Date(2026, 1, 3),
+  ];
+
+  const isDateBooked = (date: Date) => {
+    return bookedDates.some(
+      (bookedDate) =>
+        date.getDate() === bookedDate.getDate() &&
+        date.getMonth() === bookedDate.getMonth() &&
+        date.getFullYear() === bookedDate.getFullYear()
+    );
+  };
+
   const getPriceForDate = (date: Date): number => {
     const month = date.getMonth() + 1;
     if (month >= 7 && month <= 8) return 5500;
@@ -103,7 +123,16 @@ const BookingForm = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={checkIn} onSelect={setCheckIn} />
+                <Calendar 
+                  mode="single" 
+                  selected={checkIn} 
+                  onSelect={setCheckIn}
+                  modifiers={{ booked: bookedDates }}
+                  modifiersClassNames={{
+                    booked: 'text-red-600 font-bold line-through'
+                  }}
+                  disabled={isDateBooked}
+                />
               </PopoverContent>
             </Popover>
           </div>
@@ -117,7 +146,16 @@ const BookingForm = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={checkOut} onSelect={setCheckOut} />
+                <Calendar 
+                  mode="single" 
+                  selected={checkOut} 
+                  onSelect={setCheckOut}
+                  modifiers={{ booked: bookedDates }}
+                  modifiersClassNames={{
+                    booked: 'text-red-600 font-bold line-through'
+                  }}
+                  disabled={isDateBooked}
+                />
               </PopoverContent>
             </Popover>
           </div>
